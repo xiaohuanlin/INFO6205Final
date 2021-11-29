@@ -17,7 +17,7 @@ public class MSDChineseStringSort {
         aux = new String[n];
         auxPinyin = new String[n];
         pinyin = new String[n];
-       
+
         for (int i = 0; i < n; i++) {
             StringBuffer sb = new StringBuffer();
             for (int j = 0; j < a[i].length(); j++) {
