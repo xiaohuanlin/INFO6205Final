@@ -37,18 +37,4 @@ public class MSDChineseStringSortTest {
         };
         assertArrayEquals(expected, input);
     }
-
-    @Test
-    public void sortWithSamePinyin(){
-        String[] input = {"赵四文","赵四问","赵俟温","赵斯文"};
-        String[] expected = {"赵斯文","赵俟温","赵四文","赵四问"};
-
-        MSDChineseStringSort.sort(input);
-        assertArrayEquals(expected, input);
-        System.out.println(Arrays.toString(input));
-    }
-
-
-
-
 }
