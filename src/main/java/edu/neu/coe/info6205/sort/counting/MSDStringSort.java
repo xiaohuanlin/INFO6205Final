@@ -41,6 +41,9 @@ public class MSDStringSort {
             if (hi - lo >= 0) System.arraycopy(aux, 0, a, lo, hi - lo);
             // Recursively sort for each character value.
             // TO BE IMPLEMENTED
+            for (int r = 0; r < radix; r++) {
+                sort(a, count[r] + lo, count[r + 1] + lo, d + 1);
+            }
         }
     }
 

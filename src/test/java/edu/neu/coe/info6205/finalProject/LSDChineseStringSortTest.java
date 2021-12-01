@@ -6,12 +6,12 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertArrayEquals;
 
-public class MSDChineseStringSortTest {
+public class LSDChineseStringSortTest {
 
     @Test
     public void sortNormalLessArray() {
         String[] input = {"张三", "李四", "王五"};
-        MSDChineseStringSort.sort(input);
+        new LSDChineseStringSort().sort(input);
         System.out.println(Arrays.toString(input));
 
         String[] expected = {"李四", "王五", "张三"};
@@ -26,7 +26,7 @@ public class MSDChineseStringSortTest {
                 "司马懿", "曹操", "周瑜", "黄盖", "张良",
                 "淳于琼", "丰成秀吉"
         };
-        MSDChineseStringSort.sort(input);
+        new LSDChineseStringSort().sort(input);
         System.out.println(Arrays.toString(input));
 
         String[] expected = {
