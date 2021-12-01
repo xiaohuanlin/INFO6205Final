@@ -1,6 +1,8 @@
 package edu.neu.coe.info6205.finalProject;
 
-
+import java.text.CollationKey;
+import java.text.Collator;
+import java.util.Locale;
 
 /**
  * Class to implement Most significant digit string sort (a radix sort).
@@ -15,15 +17,10 @@ public class MSDChineseStringSort {
     public static void sort(String[] a) {
         int n = a.length;
         aux = new String[n];
-        auxPinyin = new String[n];
-        pinyin = new String[n];
-
+        auxCollationKeys = new CollationKey[n];
+        collationKeys = new CollationKey[n];
         for (int i = 0; i < n; i++) {
-            StringBuffer sb = new StringBuffer();
-            for (int j = 0; j < a[i].length(); j++) {
-                sb.append(PinyinHelper.toHanyuPinyinStringArray(a[i].charAt(j))[0]);
-            }
-            pinyin[i] = sb.toString();
+            collationKeys[i] = collator.getCollationKey(a[i]);
         }
         sort(a, 0, n, 0);
     }
@@ -35,41 +32,44 @@ public class MSDChineseStringSort {
      * @param a the array to be sorted.
      * @param lo the low index.
      * @param hi the high index (one above the highest actually processed).
-     * @param d the number of alphabets in each Pinyin to be skipped.
+     * @param d the number of characters in each String to be skipped.
      */
     private static void sort(String[] a, int lo, int hi, int d) {
-        if (hi < lo + cutoff) InsertionSortMSD.sort(pinyin, a, lo, hi, d);
+        if (hi < lo + cutoff) InsertionSortMSD.sort(collationKeys, a, lo, hi, d);
         else {
             int[] count = new int[radix + 2];        // Compute frequency counts.
             for (int i = lo; i < hi; i++)
-                count[charAt(pinyin[i], d) + 2]++;
+                count[charAt(collationKeys[i], d) + 2]++;
             for (int r = 0; r < radix + 1; r++)      // Transform counts to indices.
                 count[r + 1] += count[r];
             for (int i = lo; i < hi; i++) {
-                aux[count[charAt(pinyin[i], d) + 1]] = a[i];
-                auxPinyin[count[charAt(pinyin[i], d) + 1]++] = pinyin[i];
+                // Distribute
+                aux[count[charAt(collationKeys[i], d) + 1]] = a[i];
+                auxCollationKeys[count[charAt(collationKeys[i], d) + 1]++] = collationKeys[i];
             }
             // Copy back.
             if (hi - lo >= 0) {
                 System.arraycopy(aux, 0, a, lo, hi - lo);
-                System.arraycopy(auxPinyin, 0, pinyin, lo, hi - lo);
+                System.arraycopy(auxCollationKeys, 0, collationKeys, lo, hi - lo);
             }
             // Recursively sort for each character value.
             // TO BE IMPLEMENTED
             for (int r = 0; r < radix; r++) {
-                sort(a, count[r] + lo, count[r + 1] + lo - 1, d + 1);
+                sort(a, count[r] + lo, count[r + 1] + lo, d + 1);
             }
         }
     }
 
-    private static int charAt(String s, int d) {
-        if (d < s.length()) return s.charAt(d);
+    private static int charAt(CollationKey k, int d) {
+        byte[] array = k.toByteArray();
+        if (d < array.length) return Byte.toUnsignedInt(array[d]);
         else return -1;
     }
 
     private static final int radix = 256;
     private static final int cutoff = 15;
+    private static final Collator collator = Collator.getInstance(Locale.CHINA);
+    private static CollationKey[] collationKeys;
+    private static CollationKey[] auxCollationKeys;
     private static String[] aux;       // auxiliary array for distribution
-    private static String[] auxPinyin;
-    private static String[] pinyin;
 }

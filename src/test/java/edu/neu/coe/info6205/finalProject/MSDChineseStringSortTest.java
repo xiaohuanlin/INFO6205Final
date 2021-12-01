@@ -32,8 +32,8 @@ public class MSDChineseStringSortTest {
         String[] expected = {
                 "曹操", "淳于琼", "丰成秀吉", "关羽", "黄盖",
                 "李四", "刘备", "司马懿", "太史慈", "王五",
-                "张飞", "张三", "赵九", "赵云", "周瑜",
-                "诸葛亮", "张良"
+                "张飞", "张良", "张三", "赵九", "赵云", "周瑜",
+                "诸葛亮"
         };
         assertArrayEquals(expected, input);
     }
