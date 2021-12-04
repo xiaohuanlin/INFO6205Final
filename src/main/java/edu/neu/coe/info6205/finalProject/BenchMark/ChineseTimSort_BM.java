@@ -1,9 +1,9 @@
 package edu.neu.coe.info6205.finalProject.BenchMark;
 
 import edu.neu.coe.info6205.finalProject.ChineseQuickSort_DualPivot;
+import edu.neu.coe.info6205.finalProject.ChineseTimSort;
 import edu.neu.coe.info6205.finalProject.ChineseWords;
 import edu.neu.coe.info6205.finalProject.FileRead;
-import edu.neu.coe.info6205.finalProject.MSDChineseStringSort;
 import edu.neu.coe.info6205.sort.Helper;
 import edu.neu.coe.info6205.sort.HelperFactory;
 import edu.neu.coe.info6205.util.Benchmark_Timer;
@@ -14,14 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class DualPivot_BM {
+public class ChineseTimSort_BM {
     public static void main(String[] args) throws IOException {
-        DualPivot_BM dualPivot_bm = new DualPivot_BM();
-        dualPivot_bm.sort250();
-        dualPivot_bm.sort500();
-        dualPivot_bm.sort1000();
-        dualPivot_bm.sort2000();
-        dualPivot_bm.sort4000();
+        ChineseTimSort_BM chineseTimSort_bm = new ChineseTimSort_BM();
+        chineseTimSort_bm.sort250();
+        chineseTimSort_bm.sort500();
+        chineseTimSort_bm.sort1000();
+        chineseTimSort_bm.sort2000();
+        chineseTimSort_bm.sort4000();
     }
     public void sort250() throws IOException {
         Config config = Config.load(DualPivot_BM.class);
@@ -31,7 +31,7 @@ public class DualPivot_BM {
         Helper<ChineseWords> xHelper = HelperFactory.create("", strings.length, config);
         xHelper.init(strings.length);
         Supplier<String[]> supplier = () -> strings;
-        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> new ChineseQuickSort_DualPivot(xHelper).sort(strings), null);
+        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> new ChineseTimSort(xHelper).sort(strings), null);
         double v = sort.runFromSupplier(supplier, 10);
         System.out.println(v);
     }
@@ -44,7 +44,7 @@ public class DualPivot_BM {
         Helper<ChineseWords> xHelper = HelperFactory.create("", strings.length, config);
         xHelper.init(strings.length);
         Supplier<String[]> supplier = () -> strings;
-        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> new ChineseQuickSort_DualPivot(xHelper).sort(strings), null);
+        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> new ChineseTimSort(xHelper).sort(strings), null);
         double v = sort.runFromSupplier(supplier, 10);
         System.out.println(v);
     }
@@ -57,7 +57,7 @@ public class DualPivot_BM {
         Helper<ChineseWords> xHelper = HelperFactory.create("", strings.length, config);
         xHelper.init(strings.length);
         Supplier<String[]> supplier = () -> strings;
-        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> new ChineseQuickSort_DualPivot(xHelper).sort(strings), null);
+        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> new ChineseTimSort(xHelper).sort(strings), null);
         double v = sort.runFromSupplier(supplier, 10);
         System.out.println(v);
     }
@@ -70,7 +70,7 @@ public class DualPivot_BM {
         Helper<ChineseWords> xHelper = HelperFactory.create("", strings.length, config);
         xHelper.init(strings.length);
         Supplier<String[]> supplier = () -> strings;
-        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> new ChineseQuickSort_DualPivot(xHelper).sort(strings), null);
+        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> new ChineseTimSort(xHelper).sort(strings), null);
         double v = sort.runFromSupplier(supplier, 10);
         System.out.println(v);
     }
@@ -83,9 +83,8 @@ public class DualPivot_BM {
         Helper<ChineseWords> xHelper = HelperFactory.create("", strings.length, config);
         xHelper.init(strings.length);
         Supplier<String[]> supplier = () -> strings;
-        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> new ChineseQuickSort_DualPivot(xHelper).sort(strings), null);
+        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> new ChineseTimSort(xHelper).sort(strings), null);
         double v = sort.runFromSupplier(supplier, 10);
         System.out.println(v);
     }
-
 }

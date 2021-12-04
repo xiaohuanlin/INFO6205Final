@@ -1,4 +1,4 @@
-package edu.neu.coe.info6205.assignment2;
+package edu.neu.coe.info6205.util;
 
 import edu.neu.coe.info6205.util.LazyLogger;
 
