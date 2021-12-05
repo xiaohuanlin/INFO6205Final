@@ -6,7 +6,11 @@ Tim sort and husky sort.
 
 ## Description
 There are the files we changed based on INFO6205 repository.
+NOTE: we have implemented the Timer class which use the assignment 2 result.
 ```
+report
+├── paper.docx
+└── report.docx
 src
 ├── main
 │   └── java
@@ -15,11 +19,13 @@ src
 │               └── coe
 │                   └── info6205
 │                       └── finalProject
-│                           ├── 2000
-│                           ├── 250
-│                           ├── 4000
-│                           ├── 500
-│                           ├── BenchMarkTest.java
+│                           ├── BenchMark
+│                           │   ├── ChineseTimSort_BM.java
+│                           │   ├── DualPivot_BM.java
+│                           │   ├── HuskySort_BM.java
+│                           │   ├── LSD_BM.java
+│                           │   ├── MSD_BM.java
+│                           │   └── Shuffle.java
 │                           ├── ChineseHuskySort.java
 │                           ├── ChineseQuickSort_DualPivot.java
 │                           ├── ChineseTimSort.java
@@ -30,8 +36,12 @@ src
 │                           ├── InsertionSortMSDForCompareAt.java
 │                           ├── LSDChineseStringSort.java
 │                           ├── MSDChineseStringSort.java
-│                           ├── res.txt
-│                           └── shuffledChinese.txt
+│                           └── data
+│                               ├── 1000
+│                               ├── 2000
+│                               ├── 250
+│                               ├── 4000
+│                               └── 500
 └── test
     └── java
         └── edu
@@ -46,10 +56,11 @@ src
                             ├── ChineseWordsTest.java
                             ├── InsertionSortMSDForCompareAtTest.java
                             ├── LSDChineseStringSortTest.java
-                            └── MSDChineseStringSortTest.java
+                            ├── MSDChineseStringSortTest.java
+                            └── ShuffleTest.java
 ```
-- we use the ChineseWords class to represent the Chinese words, it will help us 
-to compare with each other.
+- we use the ChineseWords class to represent the Chinese words, it will help us
+  to compare with each other.
 - The ComparableStartAt interface abstract the requirement of radix sorting algorithm.
 - we have implemented the MSD sorting algorithm especially for Chinese words, and
 LSD radix sorting algorithm is basically the same as this implementation.
