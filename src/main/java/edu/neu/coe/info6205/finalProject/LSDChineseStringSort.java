@@ -82,7 +82,7 @@ public class LSDChineseStringSort {
      *
      * @param strArr It contains an array of String on which LSD sort needs to be performed
      */
-    public void sort(String[] strArr) {
+    public String[] sort(String[] strArr) {
         ChineseWords[] chineseWords = new ChineseWords[strArr.length];
         for (int i = 0; i < strArr.length; i++) {
             chineseWords[i] = new ChineseWords(strArr[i]);
@@ -93,5 +93,6 @@ public class LSDChineseStringSort {
         for (int i = 0; i < strArr.length; i++) {
             strArr[i] = chineseWords[i].getOrigin();
         }
+        return strArr;
     }
 }

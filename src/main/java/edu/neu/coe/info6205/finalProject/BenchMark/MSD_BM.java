@@ -18,60 +18,36 @@ public class MSD_BM {
 
     public static void main(String[] args) throws IOException {
         MSD_BM bm = new MSD_BM(Config.load(MSD_BM.class));
-        bm.sort250();
-        bm.sort500();
-        bm.sort1000();
-        bm.sort2000();
-        bm.sort4000();
-    }
-    public void sort250(){
         List<String> list = new ArrayList<>();
-        Supplier<String[]> supplier = () ->
-                FileRead.reading(list, "src/main/java/edu/neu/coe/info6205/finalProject/data/250")
-                        .toArray(new String[0]);
-        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> MSDChineseStringSort.sort(t), null);
+        List<String> location = new ArrayList<>();
+        Configuration(list, location);
+        for(int i = 0;i < list.size();i++){
+            bm.sort(list.get(i), location.get(i));
+        }
+
+    }
+    public void sort(String name,String location){
+        List<String> list = new ArrayList<>();
+        String[] strings = FileRead.reading(list, name)
+                .toArray(new String[0]);
+        Supplier<String[]> supplier = () -> strings;
+        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> MSDChineseStringSort.sort(t), (t)->FileRead.writing(strings, location));
+
         double v = sort.runFromSupplier(supplier, 10);
         System.out.println(v);
     }
 
-    public void sort500(){
-        List<String> list = new ArrayList<>();
-        Supplier<String[]> supplier = () ->
-                FileRead.reading(list, "src/main/java/edu/neu/coe/info6205/finalProject/data/500")
-                        .toArray(new String[0]);
-        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> MSDChineseStringSort.sort(t), null);
-        double v = sort.runFromSupplier(supplier, 10);
-        System.out.println(v);
-    }
-
-    public void sort1000(){
-        List<String> list = new ArrayList<>();
-        Supplier<String[]> supplier = () ->
-                FileRead.reading(list, "src/main/java/edu/neu/coe/info6205/finalProject/data/1000")
-                        .toArray(new String[0]);
-        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> MSDChineseStringSort.sort(t), null);
-        double v = sort.runFromSupplier(supplier, 10);
-        System.out.println(v);
-    }
-
-    public void sort2000(){
-        List<String> list = new ArrayList<>();
-        Supplier<String[]> supplier = () ->
-                FileRead.reading(list, "src/main/java/edu/neu/coe/info6205/finalProject/data/2000")
-                        .toArray(new String[0]);
-        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> MSDChineseStringSort.sort(t), null);
-        double v = sort.runFromSupplier(supplier, 10);
-        System.out.println(v);
-    }
-
-    public void sort4000(){
-        List<String> list = new ArrayList<>();
-        Supplier<String[]> supplier = () ->
-                FileRead.reading(list, "src/main/java/edu/neu/coe/info6205/finalProject/data/4000")
-                        .toArray(new String[0]);
-        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> MSDChineseStringSort.sort(t), null);
-        double v = sort.runFromSupplier(supplier, 10);
-        System.out.println(v);
+    public static void Configuration(List<String> list,List<String> location){
+        list.add("src/main/java/edu/neu/coe/info6205/finalProject/data/250");
+        list.add("src/main/java/edu/neu/coe/info6205/finalProject/data/500");
+        list.add("src/main/java/edu/neu/coe/info6205/finalProject/data/1000");
+        list.add("src/main/java/edu/neu/coe/info6205/finalProject/data/2000");
+        list.add("src/main/java/edu/neu/coe/info6205/finalProject/data/4000");
+        location.add("src/main/java/edu/neu/coe/info6205/finalProject/MSD_Res/250.txt");
+        location.add("src/main/java/edu/neu/coe/info6205/finalProject/MSD_Res/500.txt");
+        location.add("src/main/java/edu/neu/coe/info6205/finalProject/MSD_Res/1000.txt");
+        location.add("src/main/java/edu/neu/coe/info6205/finalProject/MSD_Res/2000.txt");
+        location.add("src/main/java/edu/neu/coe/info6205/finalProject/MSD_Res/4000.txt");
     }
 }
 

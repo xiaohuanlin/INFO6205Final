@@ -16,16 +16,6 @@ public class FileRead {
             BufferedReader in = new BufferedReader(fr);
             while((thisLine = in.readLine())!=null) {
                 list.add(thisLine);
-
-//					 int id = Integer.valueOf(fields[0]);
-//					 int age = Integer.valueOf(fields[1]);
-//					 String fname = fields[2];
-//					 String lname = fields[3];
-//					 String parentFname = fields[4];
-//					 String parentLname = fields[5];
-//					 int hwage = Integer.valueOf(fields[6]);
-//					 list.add(new Teacher(id,age,fname,lname,parentFname,parentLname,hwage));
-
             }
 
         } catch (IOException e) {
@@ -35,9 +25,9 @@ public class FileRead {
         return list;
 
     }
-    public static void writing(String[] strings) {
+    public static void writing(String[] strings,String location) {
         try {
-            FileWriter fw = new FileWriter("src/main/java/edu/neu/coe/info6205/finalProject/res.txt");
+            FileWriter fw = new FileWriter(location);
             BufferedWriter out = new BufferedWriter(fw);
             for(String s:strings) {
                 out.write(s.toString());

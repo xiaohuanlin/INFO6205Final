@@ -10,7 +10,7 @@ public class MSDChineseStringSort {
      *
      * @param a the array to be sorted.
      */
-    public static void sort(String[] a) {
+    public static String[] sort(String[] a) {
         int n = a.length;
         aux = new ChineseWords[n];
         ChineseWords[] chineseWords = new ChineseWords[a.length];
@@ -23,6 +23,7 @@ public class MSDChineseStringSort {
         for (int i = 0; i < a.length; i++) {
             a[i] = chineseWords[i].getOrigin();
         }
+        return a;
     }
 
     /**

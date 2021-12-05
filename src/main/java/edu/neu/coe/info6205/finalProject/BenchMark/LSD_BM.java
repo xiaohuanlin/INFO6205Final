@@ -1,5 +1,6 @@
 package edu.neu.coe.info6205.finalProject.BenchMark;
 
+import edu.neu.coe.info6205.finalProject.ChineseHuskySort;
 import edu.neu.coe.info6205.finalProject.FileRead;
 import edu.neu.coe.info6205.finalProject.LSDChineseStringSort;
 import edu.neu.coe.info6205.finalProject.MSDChineseStringSort;
@@ -11,59 +12,34 @@ import java.util.function.Supplier;
 
 public class LSD_BM {
     public static void main(String[] args) {
-        LSD_BM lsd_bm = new LSD_BM();
-        lsd_bm.sort250();
-        lsd_bm.sort500();
-        lsd_bm.sort1000();
-        lsd_bm.sort2000();
-        lsd_bm.sort4000();
-    }
-    public void sort250(){
         List<String> list = new ArrayList<>();
-        Supplier<String[]> supplier = () ->
-                FileRead.reading(list, "src/main/java/edu/neu/coe/info6205/finalProject/data/250")
-                        .toArray(new String[0]);
-        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> new LSDChineseStringSort().sort(t), null);
-        double v = sort.runFromSupplier(supplier, 10);
-        System.out.println(v);
+        List<String> location = new ArrayList<>();
+        Configuration(list, location);
+        for(int i = 0;i < list.size();i++){
+            sort(list.get(i), location.get(i));
+        }
     }
-    public void sort500(){
+    public static void sort(String name,String location){
         List<String> list = new ArrayList<>();
-        Supplier<String[]> supplier = () ->
-                FileRead.reading(list, "src/main/java/edu/neu/coe/info6205/finalProject/data/500")
-                        .toArray(new String[0]);
-        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> new LSDChineseStringSort().sort(t), null);
+        String[] strings = FileRead.reading(list, name)
+                .toArray(new String[0]);
+        Supplier<String[]> supplier = () -> strings;
+       Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> new LSDChineseStringSort().sort(t), t->FileRead.writing(t,location));
+
         double v = sort.runFromSupplier(supplier, 10);
         System.out.println(v);
     }
 
-    public void sort1000(){
-        List<String> list = new ArrayList<>();
-        Supplier<String[]> supplier = () ->
-                FileRead.reading(list, "src/main/java/edu/neu/coe/info6205/finalProject/data/1000")
-                        .toArray(new String[0]);
-        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> new LSDChineseStringSort().sort(t), null);
-        double v = sort.runFromSupplier(supplier, 10);
-        System.out.println(v);
-    }
-
-    public void sort2000(){
-        List<String> list = new ArrayList<>();
-        Supplier<String[]> supplier = () ->
-                FileRead.reading(list, "src/main/java/edu/neu/coe/info6205/finalProject/data/2000")
-                        .toArray(new String[0]);
-        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> new LSDChineseStringSort().sort(t), null);
-        double v = sort.runFromSupplier(supplier, 10);
-        System.out.println(v);
-    }
-
-    public void sort4000(){
-        List<String> list = new ArrayList<>();
-        Supplier<String[]> supplier = () ->
-                FileRead.reading(list, "src/main/java/edu/neu/coe/info6205/finalProject/data/4000")
-                        .toArray(new String[0]);
-        Benchmark_Timer<String[]> sort = new Benchmark_Timer<String[]>("sort", Shuffle::shuffle, t -> new LSDChineseStringSort().sort(t), null);
-        double v = sort.runFromSupplier(supplier, 10);
-        System.out.println(v);
+    public static void Configuration(List<String> list,List<String> location){
+        list.add("src/main/java/edu/neu/coe/info6205/finalProject/data/250");
+        list.add("src/main/java/edu/neu/coe/info6205/finalProject/data/500");
+        list.add("src/main/java/edu/neu/coe/info6205/finalProject/data/1000");
+        list.add("src/main/java/edu/neu/coe/info6205/finalProject/data/2000");
+        list.add("src/main/java/edu/neu/coe/info6205/finalProject/data/4000");
+        location.add("src/main/java/edu/neu/coe/info6205/finalProject/LSD_Res/250.txt");
+        location.add("src/main/java/edu/neu/coe/info6205/finalProject/LSD_Res/500.txt");
+        location.add("src/main/java/edu/neu/coe/info6205/finalProject/LSD_Res/1000.txt");
+        location.add("src/main/java/edu/neu/coe/info6205/finalProject/LSD_Res/2000.txt");
+        location.add("src/main/java/edu/neu/coe/info6205/finalProject/LSD_Res/4000.txt");
     }
 }
