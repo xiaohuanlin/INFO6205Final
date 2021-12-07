@@ -1,15 +1,15 @@
 package edu.neu.coe.info6205.finalProject.SortRes;
 
 import edu.neu.coe.info6205.finalProject.BenchMark.Shuffle;
-import edu.neu.coe.info6205.finalProject.ChineseHuskySort;
 import edu.neu.coe.info6205.finalProject.FileRead;
+import edu.neu.coe.info6205.finalProject.LSDChineseStringSort;
 import edu.neu.coe.info6205.util.Benchmark_Timer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class HuskySortTest {
+public class LSDSortSample {
     public static void main(String[] args) {
         List<String> list = new ArrayList<>();
         List<String> location = new ArrayList<>();
@@ -22,16 +22,13 @@ public class HuskySortTest {
         List<String> list = new ArrayList<>();
         String[] strings = FileRead.reading(list, name)
                 .toArray(new String[0]);
-        String[] sort1 = new ChineseHuskySort().sort(strings);
-        FileRead.writing(sort1, location);
+        String[] sort = new LSDChineseStringSort().sort(strings);
+        FileRead.writing(sort, location);
 
     }
 
     public static void Configuration(List<String> list,List<String> location){
         list.add("src/main/java/edu/neu/coe/info6205/finalProject/data/100");
-        location.add("src/main/java/edu/neu/coe/info6205/finalProject/SortRes/HuskyRes");
+        location.add("src/main/java/edu/neu/coe/info6205/finalProject/SortRes/LSDRes");
     }
-
-
-
 }
